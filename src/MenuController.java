@@ -4,10 +4,10 @@ public class MenuController {
 
 
     Scanner inputValue = new Scanner(System.in);
-    DominoUtilizer dominoUtilizer;
+    DominoEditor dominoEditor;
 
     public MenuController(String DominoPath, String dummyDataPath) {
-        dominoUtilizer = new DominoUtilizer(DominoPath, dummyDataPath);
+        dominoEditor = new DominoEditor(DominoPath, dummyDataPath);
     }
 
     public String showMenu() {
@@ -26,23 +26,23 @@ public class MenuController {
         System.out.println("\n".repeat(20));
         switch (userInput) {
             case "1":
-                dominoUtilizer.printAllStones();
+                dominoEditor.printAllStones();
                 inputValue.nextLine();
                 break;
             case "2":
-                dominoUtilizer.addStoneForm();
+                dominoEditor.addStoneForm();
                 inputValue.nextLine();
                 break;
             case "3":
-                dominoUtilizer.deleteStoneForm();
+                dominoEditor.deleteStoneForm();
                 inputValue.nextLine();
                 break;
             case "4":
-                dominoUtilizer.calculateSolution();
+                dominoEditor.calculateSolution();
                 inputValue.nextLine();
                 break;
             case "5":
-                dominoUtilizer.overWriteFileAndArrayWithDummyData();
+                dominoEditor.overWriteFileAndArrayWithDummyData();
                 break;
             case "X":
             case "x":

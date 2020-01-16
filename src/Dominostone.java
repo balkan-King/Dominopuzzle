@@ -1,4 +1,5 @@
-public class Dominostone {
+public class Dominostone{
+
     private int leftField;
     private int rightField;
     private boolean isSet;
@@ -18,12 +19,17 @@ public class Dominostone {
         System.out.print("| " + leftField + " | " + rightField + " |");
     }
 
+    public String printInFile(){
+        return leftField + ":" + rightField + "\n";
+    }
+
     public void turnFields(){
         int save = leftField;
         leftField = rightField;
         rightField = save;
     }
 
+    //getters and setters
     public int getLeftField() {
         return leftField;
     }
@@ -55,4 +61,5 @@ public class Dominostone {
     public void setCanTurn(boolean canTurn) {
         this.canTurn = canTurn;
     }
+
 }

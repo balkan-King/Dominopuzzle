@@ -1,5 +1,4 @@
 import java.io.*;
-import java.net.SecureCacheResponse;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,42 +29,23 @@ public class FileEditor {
         return allStones;
     }
 
-
-    public void deleteDomino(int position){
-        File newData = new File("src\\Dominos\\temporary_name.txt");
+    //converts the dominoarray to file
+    public void convertArrayToFile(ArrayList<Dominostone> allStones){
         File oldData = new File(dominoPath);
-        if(createNewFile(newData)){
-            if(copyData(oldData, newData, position)){
-                if(deleteOldFile(oldData)){
-                    newData.renameTo(new File("src\\Dominos\\dominos.txt"));
-                    System.out.println("Dominostone successfully deleted");
+        if(deleteOldFile(oldData)){
+            File newData = new File(dominoPath);
+            if(createNewFile(newData)){
+                try {
+                    BufferedWriter copyToWriter = new BufferedWriter(new FileWriter(newData));
+                    for(int x = 0; x <allStones.size(); x++){
+                        copyToWriter.append(allStones.get(x).printInFile());
+                    }
+                    copyToWriter.close();
+                }catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         }
-    }
-
-    public boolean copyData(File source, File copyTo, int pos){
-        String nextLine;
-        int repetition = 0;
-        try {
-            BufferedReader sourceReader = new BufferedReader(new FileReader(source));
-            BufferedWriter copyToWriter = new BufferedWriter(new FileWriter(copyTo));
-            while((nextLine = sourceReader.readLine())!=null){
-                if(!(repetition == (pos - 1))){
-                    copyToWriter.append(nextLine + "\n");
-                }
-                repetition++;
-            }
-            sourceReader.close();
-            copyToWriter.close();
-            return true;
-        }catch(FileNotFoundException e){
-            System.out.println("File not found");
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
     //The following functions are needed to copy the dummydata into the normal file

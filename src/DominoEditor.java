@@ -1,14 +1,15 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
-public class DominoUtilizer {
+public class DominoEditor {
 
     private ArrayList<Dominostone> allStones;
     private DominoCalculator dominoCalculator = new DominoCalculator();
     private FileEditor fileEditor;
     private Scanner inputValue = new Scanner(System.in);
 
-    public DominoUtilizer(String dominoPath, String dummyDataPath) {
+    public DominoEditor(String dominoPath, String dummyDataPath) {
         fileEditor = new FileEditor(dummyDataPath, dominoPath);
         this.allStones = fileEditor.readDominosFile();
     }
@@ -38,15 +39,26 @@ public class DominoUtilizer {
 
     //This two functions are needed to add a stone (UNFINISHED)
     public void addStoneForm(){
+        Dominostone dominostone;
+        System.out.println("Whats the smaller value of the domino");
+        int smallerValue = Integer.parseInt(inputValue.nextLine());
+        System.out.println("Whats the bigger value of the domino");
+        int biggerValue = Integer.parseInt(inputValue.nextLine());
 
+        if(smallerValue <= biggerValue)
+            dominostone = new Dominostone(smallerValue, biggerValue);
+        else
+            dominostone = new Dominostone(biggerValue, smallerValue);
+
+        addStone(dominostone);
     }
+
     private void addStone(Dominostone d){
         allStones.add(d);
-        //allStones.sort(); //needs to be implemented
-        //add to file
+        allStones.sort(new DominoComparator());
+        fileEditor.convertArrayToFile(allStones);
         adjustArray();
     }
-
 
     //This two methods are needed to delete a stone (EXTEND TO SHOW IF IT COULDNT BE DELETED BECAUSE THE USERENTRY WAS WRONG)
     public void deleteStoneForm(){
@@ -58,7 +70,7 @@ public class DominoUtilizer {
 
     private void deleteStone(int deleteStone){
         allStones.remove(deleteStone - 1);
-        fileEditor.deleteDomino(deleteStone);
+        fileEditor.convertArrayToFile(allStones);
         adjustArray();
     }
 
