@@ -3,20 +3,18 @@ import java.util.Scanner;
 
 public class DominoUtilizer {
 
-    private String filePath;
-
     private ArrayList<Dominostone> allStones;
     private DominoCalculator dominoCalculator = new DominoCalculator();
-    private FileEditor fileEditor = new FileEditor();
+    private FileEditor fileEditor;
     private Scanner inputValue = new Scanner(System.in);
 
-    public DominoUtilizer(String path) {
-        this.allStones = fileEditor.readDominosFile(path);
-        this.filePath = path;
+    public DominoUtilizer(String dominoPath, String dummyDataPath) {
+        fileEditor = new FileEditor(dummyDataPath, dominoPath);
+        this.allStones = fileEditor.readDominosFile();
     }
 
 
-    //This function is needed to display all stones
+    //This function is needed to display all stones (COULD BE BETTER)
     public void printAllStones() {
         if (dominoArrayIsNotEmpty()){
             int count = 0;
@@ -38,7 +36,7 @@ public class DominoUtilizer {
     }
 
 
-    //This two functions are needed to add a stone UNFINISHED
+    //This two functions are needed to add a stone (UNFINISHED)
     public void addStoneForm(){
 
     }
@@ -50,7 +48,7 @@ public class DominoUtilizer {
     }
 
 
-    //This two methods are needed to delete a stone UNFINISHED
+    //This two methods are needed to delete a stone (EXTEND TO SHOW IF IT COULDNT BE DELETED BECAUSE THE USERENTRY WAS WRONG)
     public void deleteStoneForm(){
         printAllStones();
         System.out.println("Select which stone you want to remove:");
@@ -60,15 +58,16 @@ public class DominoUtilizer {
 
     private void deleteStone(int deleteStone){
         allStones.remove(deleteStone - 1);
-        //delete from file
+        fileEditor.deleteDomino(deleteStone);
         adjustArray();
     }
 
 
-    //this method performs the calculation
+    //performs the calculation
     public void calculateSolution(){
         if(dominoArrayIsNotEmpty()){
             String confirmation = "";
+            //if the array contains more then 15 stones it prints a warning, that it could take a while
             if (allStones.size() > 15) {
                 System.out.println("The calculation could take a while with such an amount of dominos\n If you want to adjust your dominostones enter 'x'");
                 confirmation = inputValue.nextLine();
@@ -78,22 +77,23 @@ public class DominoUtilizer {
         }
     }
 
-
-    //this method overwrites the array and the userfile with some dummydata UNFINISHED
-    public void overWriteArrayWithDummyData(){
-
+    //overwrites the array and the userfile with some dummydata
+    public void overWriteFileAndArrayWithDummyData(){
+        fileEditor.useDummyData();
+        allStones = fileEditor.readDominosFile();
     }
 
-
+    //updates the array containing all Dominostones
     public void adjustArray(){
-        allStones = fileEditor.readDominosFile(filePath);
+        allStones = fileEditor.readDominosFile();
     }
 
+    //tests if the array containing all Dominostones, if not it prints a warning
     public boolean dominoArrayIsNotEmpty(){
         if(!allStones.isEmpty()) {
             return true;
         } else{
-            System.out.println("Your Array is empty");
+            System.err.println("Your Array is empty");
             return false;
         }
     }
@@ -129,14 +129,6 @@ public class DominoUtilizer {
 
     public void setFileEditor(FileEditor fileEditor) {
         this.fileEditor = fileEditor;
-    }
-
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
     }
 
     public Scanner getInputValue() {

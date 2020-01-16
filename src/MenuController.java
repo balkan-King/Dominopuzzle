@@ -6,8 +6,8 @@ public class MenuController {
     Scanner inputValue = new Scanner(System.in);
     DominoUtilizer dominoUtilizer;
 
-    public MenuController(String path) {
-        dominoUtilizer = new DominoUtilizer(path);
+    public MenuController(String DominoPath, String dummyDataPath) {
+        dominoUtilizer = new DominoUtilizer(DominoPath, dummyDataPath);
     }
 
     public String showMenu() {
@@ -42,7 +42,7 @@ public class MenuController {
                 inputValue.nextLine();
                 break;
             case "5":
-                dominoUtilizer.overWriteArrayWithDummyData();
+                dominoUtilizer.overWriteFileAndArrayWithDummyData();
                 break;
             case "X":
             case "x":
