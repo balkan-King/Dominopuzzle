@@ -6,10 +6,24 @@ public class FileEditor {
 
     private String dummyDataPath;
     private String dominoPath;
+    private String resultFile;
 
-    public FileEditor(String dummyDataPath, String dominoPath) {
+    public FileEditor(String dummyDataPath, String dominoPath, String resultFile) {
         this.dummyDataPath = dummyDataPath;
         this.dominoPath = dominoPath;
+        this.resultFile = resultFile;
+        File endResult = new File(resultFile);
+        deleteFileIfAlreadyExistsThenCreate(endResult);
+    }
+
+    public void deleteFileIfAlreadyExistsThenCreate(File file){
+        try {
+            if (file.exists())
+                file.delete();
+            file.createNewFile();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<Dominostone> readDominosFile() {
@@ -103,5 +117,27 @@ public class FileEditor {
             return true;
         System.out.println("Old File could not be deleted");
         return false;
+    }
+
+
+    //This function writes into the solution file
+    public void printSolution(Dominostone dominostone){
+        try {
+            FileWriter copyToWriter = new FileWriter(resultFile, true);
+            copyToWriter.append(dominostone.toString());
+            copyToWriter.close();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void addLineSeperator(){
+        try {
+            FileWriter copyToWriter = new FileWriter(resultFile, true);
+            copyToWriter.append("\n");
+            copyToWriter.close();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }

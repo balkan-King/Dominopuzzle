@@ -6,8 +6,8 @@ public class MenuController {
     Scanner inputValue = new Scanner(System.in);
     DominoEditor dominoEditor;
 
-    public MenuController(String DominoPath, String dummyDataPath) {
-        dominoEditor = new DominoEditor(DominoPath, dummyDataPath);
+    public MenuController(String DominoPath, String dummyDataPath, String resultFile) {
+        dominoEditor = new DominoEditor(DominoPath, dummyDataPath, resultFile);
     }
 
     public String showMenu() {

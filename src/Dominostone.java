@@ -19,6 +19,10 @@ public class Dominostone{
         System.out.print("| " + leftField + " | " + rightField + " |");
     }
 
+    public String toString(){
+        return "| " + leftField + " | " + rightField + " |";
+    }
+
     public String printInFile(){
         return leftField + ":" + rightField + "\n";
     }

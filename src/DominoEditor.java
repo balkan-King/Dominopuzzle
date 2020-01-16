@@ -5,12 +5,13 @@ import java.util.Scanner;
 public class DominoEditor {
 
     private ArrayList<Dominostone> allStones;
-    private DominoCalculator dominoCalculator = new DominoCalculator();
+    private DominoCalculator dominoCalculator;
     private FileEditor fileEditor;
     private Scanner inputValue = new Scanner(System.in);
 
-    public DominoEditor(String dominoPath, String dummyDataPath) {
-        fileEditor = new FileEditor(dummyDataPath, dominoPath);
+    public DominoEditor(String dominoPath, String dummyDataPath, String resultFile) {
+        fileEditor = new FileEditor(dummyDataPath, dominoPath, resultFile);
+        dominoCalculator = new DominoCalculator(fileEditor);
         this.allStones = fileEditor.readDominosFile();
     }
 

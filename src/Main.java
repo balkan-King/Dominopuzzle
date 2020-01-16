@@ -2,9 +2,10 @@ public class Main {
     public static void main(String[] args) {
         String fileLocation = "src\\Dominos\\dominos.txt";
         String dummyDataLocation = "src\\Dominos\\dummydata.txt";
-        String entry = "0";
+        String resultFile = "src\\Dominos\\solution.txt";
+        String entry;
 
-        MenuController menuController = new MenuController(fileLocation, dummyDataLocation);
+        MenuController menuController = new MenuController(fileLocation, dummyDataLocation, resultFile);
 
         do {
             entry = menuController.showMenu();

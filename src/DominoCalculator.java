@@ -3,6 +3,11 @@ import java.util.ArrayList;
 public class DominoCalculator {
 
     private ArrayList<Dominostone> orderedDominos = new ArrayList<>();
+    private FileEditor fileEditor;
+
+    public DominoCalculator(FileEditor fileEditor) {
+        this.fileEditor = fileEditor;
+    }
 
     public void printAllPossibilities(ArrayList<Dominostone> allStones){
         for(int x = 0; x<allStones.size(); x++) {
@@ -56,8 +61,10 @@ public class DominoCalculator {
     private void printDominoArray(){
         for (Dominostone d : orderedDominos) {
             d.print();
+            fileEditor.printSolution(d);
         }
         System.out.println();
+        fileEditor.addLineSeperator();
     }
 
     private boolean stoneCanBeAdded(ArrayList<Dominostone> allOtherStones, int x){
