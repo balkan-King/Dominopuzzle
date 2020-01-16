@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class FileEditor {
 
-    public static ArrayList<Dominostone> readDominosFile(String fileLocation) {
+    public ArrayList<Dominostone> readDominosFile(String fileLocation) {
         ArrayList<Dominostone> allStones = new ArrayList<>();
         try{
         Scanner dominosFile = new Scanner(new File(fileLocation));
