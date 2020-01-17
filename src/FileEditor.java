@@ -2,10 +2,23 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class contains the logic for handling with the files.
+ * It can read from files write into files and everything besides that.
+ */
 public class FileEditor {
 
+    /**
+     * Variable which directs to the file containing some dummy dominos, which can be copied into the.
+     */
     private String dummyDataPath;
+    /**
+     * Variable which directs to the file containing the dominos inside.
+     */
     private String dominoPath;
+    /**
+     * Variable which direct to the file where the result of the calculation will be printed in at the end.
+     */
     private String resultFile;
 
     public FileEditor(String dummyDataPath, String dominoPath, String resultFile) {
@@ -16,16 +29,28 @@ public class FileEditor {
         deleteFileIfAlreadyExistsThenCreate(endResult);
     }
 
-    public void deleteFileIfAlreadyExistsThenCreate(File file){
+    /**
+     * Method that creates a file, it already exists it gets deleted.
+     * @param file that gets deleted and created.
+     * @returnn true if the creation was successful, false if not.
+     */
+    public boolean deleteFileIfAlreadyExistsThenCreate(File file){
         try {
             if (file.exists())
                 file.delete();
             file.createNewFile();
+            return true;
         }catch(IOException e){
             e.printStackTrace();
         }
+        return false;
     }
 
+    /**
+     * Method that reads the dominofile and puts the data into the given arraylist.
+     * @param allStones arraylist in which the data gets extracted.
+     * @return true if the creation was successful, false if not.
+     */
     public boolean readDominosFile(ArrayList<Dominostone> allStones) {
         allStones.removeAll(allStones);
         Scanner dominosFile;
@@ -44,14 +69,17 @@ public class FileEditor {
         return false;
     }
 
-    //converts the dominoarray to file
+    /**
+     * Method that copies the given arraylist into the dominoFile to overwrite it.
+     * @param allStones ArrayList.
+     * @return true if the creation was successful, false if not.
+     */
     public boolean convertArrayToFile(ArrayList<Dominostone> allStones){
         File oldData = new File(dominoPath);
         if(deleteOldFile(oldData)){
-            File newData = new File(dominoPath);
-            if(createNewFile(newData)){
+            if(createNewFile(oldData)){
                 try {
-                    BufferedWriter copyToWriter = new BufferedWriter(new FileWriter(newData));
+                    BufferedWriter copyToWriter = new BufferedWriter(new FileWriter(oldData));
                     for(int x = 0; x <allStones.size(); x++){
                         copyToWriter.append(allStones.get(x).printInFile());
                     }
@@ -65,30 +93,35 @@ public class FileEditor {
         return false;
     }
 
-    //The following functions are needed to copy the dummydata into the normal file
+    /**
+     * Method that overwrites the dominoFile with the given dummy data.
+     */
     public void useDummyData() {
-        File oldData = new File(dominoPath);
+        File dominoFile = new File(dominoPath);
         File dummyFile = new File(dummyDataPath);
-        if(deleteOldFile(oldData)){
-            File newData = new File(dominoPath);
-            if(createNewFile(newData)){
-                if(copyData(dummyFile, newData)){
+        if(deleteOldFile(dominoFile)){
+            if(createNewFile(dominoFile)){
+                if(copyData(dummyFile, dominoFile)){
                     System.out.println("Dummydata was successfully applied");
                 }
             }
         }
     }
 
+    /**
+     * Method that copies the data from the source File to the copyTo File.
+     * @param source File.
+     * @param copyTo File.
+     * @return true if the creation was successful, false if not.
+     */
     public boolean copyData(File source, File copyTo){
         try {
             FileInputStream sourceStream = new FileInputStream(source);
             FileOutputStream copyToStream = new FileOutputStream(copyTo);
-
             byte[] buffer = new byte[1024];
             int length;
 
             while ((length = sourceStream.read(buffer)) > 0) {
-
                 copyToStream.write(buffer, 0, length);
             }
 
@@ -104,9 +137,14 @@ public class FileEditor {
         return false;
     }
 
-    public boolean createNewFile(File newFile){
+    /**
+     * Method that tries to create the file given as parameter.
+     * @param file .
+     * @return true if it could be created.
+     */
+    public boolean createNewFile(File file){
         try{
-            if(newFile.createNewFile())
+            if(file.createNewFile())
                 return true;
             System.out.println("The File already exists");
         }catch(IOException e){
@@ -115,30 +153,40 @@ public class FileEditor {
         return false;
     }
 
-    public boolean deleteOldFile(File oldData){
-        if(oldData.delete())
+    /**
+     * Method that tries to delete the file given as parameter.
+     * @param file .
+     * @return true if it could be deleted.
+     */
+    public boolean deleteOldFile(File file){
+        if(file.delete())
             return true;
-        System.out.println("Old File could not be deleted");
+        System.out.println("File could not be deleted");
         return false;
     }
 
-
-    //This function writes into the solution file
+    /**
+     * Method that prints dominostone into the solutionFile.
+     * @param dominostone .
+     */
     public void printSolution(Dominostone dominostone){
         try {
-            FileWriter copyToWriter = new FileWriter(resultFile, true);
-            copyToWriter.append(dominostone.toString());
-            copyToWriter.close();
+            FileWriter fileWriter = new FileWriter(resultFile, true);
+            fileWriter.append(dominostone.toString());
+            fileWriter.close();
         }catch(IOException e){
             e.printStackTrace();
         }
     }
 
+    /**
+     * Method that adds a new line into the solutionFile.
+     */
     public void addLineSeperator(){
         try {
-            FileWriter copyToWriter = new FileWriter(resultFile, true);
-            copyToWriter.append("\n");
-            copyToWriter.close();
+            FileWriter fileWriter = new FileWriter(resultFile, true);
+            fileWriter.append("\n");
+            fileWriter.close();
         }catch(IOException e){
             e.printStackTrace();
         }
