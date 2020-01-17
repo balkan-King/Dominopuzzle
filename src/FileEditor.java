@@ -26,8 +26,8 @@ public class FileEditor {
         }
     }
 
-    public ArrayList<Dominostone> readDominosFile() {
-        ArrayList<Dominostone> allStones = new ArrayList<>();
+    public boolean readDominosFile(ArrayList<Dominostone> allStones) {
+        allStones.removeAll(allStones);
         Scanner dominosFile;
         try{
             dominosFile = new Scanner(new File(dominoPath));
@@ -37,14 +37,15 @@ public class FileEditor {
                 allStones.add(dominostone);
             }
             dominosFile.close();
+            return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return allStones;
+        return false;
     }
 
     //converts the dominoarray to file
-    public void convertArrayToFile(ArrayList<Dominostone> allStones){
+    public boolean convertArrayToFile(ArrayList<Dominostone> allStones){
         File oldData = new File(dominoPath);
         if(deleteOldFile(oldData)){
             File newData = new File(dominoPath);
@@ -55,11 +56,13 @@ public class FileEditor {
                         copyToWriter.append(allStones.get(x).printInFile());
                     }
                     copyToWriter.close();
+                    return true;
                 }catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
+        return false;
     }
 
     //The following functions are needed to copy the dummydata into the normal file

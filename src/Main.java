@@ -1,15 +1,34 @@
+/**
+ * The Main Class contains the main function, which gets executed first, once you start the program.
+ *
+ * @Author David Pavlic & Suhejl Asani
+ * @Version 1.0
+ */
 public class Main {
     public static void main(String[] args) {
-        String fileLocation = "src\\Dominos\\dominos.txt";
+        /**
+         * Variable which directs to the file containing the dominos inside
+         */
+        String dominoPath = "src\\Dominos\\dominos.txt";
+        /**
+         * Variable which directs to the file containing some dummy dominos, which can be copied into the
+         */
         String dummyDataLocation = "src\\Dominos\\dummydata.txt";
+        /**
+         * Variable which direct to the file where the result of the calculation will be printed in at the end
+         */
         String resultFile = "src\\Dominos\\solution.txt";
-        String entry;
+        /**
+         * Variable which saves the decision of the user, after seeing the menu
+         */
+        String userInput;
 
-        MenuController menuController = new MenuController(fileLocation, dummyDataLocation, resultFile);
+        MenuController menuController = new MenuController(dominoPath, dummyDataLocation, resultFile);
 
+        //This loop is the whole application and gets repeated until the user enters an x
         do {
-            entry = menuController.showMenu();
-            menuController.switchCase(entry);
-        } while (!entry.toLowerCase().equals("x"));
+            userInput = menuController.showMenuAndGetUserInput();
+            menuController.switchCase(userInput);
+        } while (!userInput.toLowerCase().equals("x"));
     }
 }

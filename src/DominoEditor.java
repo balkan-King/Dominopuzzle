@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class DominoEditor {
 
-    private ArrayList<Dominostone> allStones;
+    private ArrayList<Dominostone> allStones = new ArrayList<>();
     private DominoCalculator dominoCalculator;
     private FileEditor fileEditor;
     private Scanner inputValue = new Scanner(System.in);
@@ -12,7 +12,7 @@ public class DominoEditor {
     public DominoEditor(String dominoPath, String dummyDataPath, String resultFile) {
         fileEditor = new FileEditor(dummyDataPath, dominoPath, resultFile);
         dominoCalculator = new DominoCalculator(fileEditor);
-        this.allStones = fileEditor.readDominosFile();
+        fileEditor.readDominosFile(allStones);
     }
 
 
@@ -41,25 +41,37 @@ public class DominoEditor {
     //This two functions are needed to add a stone (UNFINISHED)
     public void addStoneForm(){
         Dominostone dominostone;
-        System.out.println("Whats the smaller value of the domino");
-        int smallerValue = Integer.parseInt(inputValue.nextLine());
-        System.out.println("Whats the bigger value of the domino");
-        int biggerValue = Integer.parseInt(inputValue.nextLine());
+        int smallerValue, biggerValue;
+        try {
 
-        if(smallerValue <= biggerValue)
-            dominostone = new Dominostone(smallerValue, biggerValue);
-        else
-            dominostone = new Dominostone(biggerValue, smallerValue);
+            System.out.println("Whats the smaller value of the domino");
+            smallerValue = Integer.parseInt(inputValue.nextLine());
+            System.out.println("Whats the bigger value of the domino");
+            biggerValue = Integer.parseInt(inputValue.nextLine());
+            if(smallerValue <= biggerValue)
+                dominostone = new Dominostone(smallerValue, biggerValue);
+            else
+                dominostone = new Dominostone(biggerValue, smallerValue);
 
-        addStone(dominostone);
+            if(addStone(dominostone))
+                System.out.println("A new Dominostone could be created");
+
+        } catch(NumberFormatException e){
+            System.out.println("Please enter a valid value");
+        }
     }
 
-    private void addStone(Dominostone d){
-        allStones.add(d);
-        allStones.sort(new DominoComparator());
-        fileEditor.convertArrayToFile(allStones);
-        adjustArray();
+    private boolean addStone(Dominostone d){
+        if(allStones.add(d)){
+            allStones.sort(new DominoComparator());
+            if(fileEditor.convertArrayToFile(allStones)){
+                if(adjustArray())
+                    return true;
+            }
+        }
+        return false;
     }
+
 
     //This two methods are needed to delete a stone (EXTEND TO SHOW IF IT COULDNT BE DELETED BECAUSE THE USERENTRY WAS WRONG)
     public void deleteStoneForm(){
@@ -93,12 +105,12 @@ public class DominoEditor {
     //overwrites the array and the userfile with some dummydata
     public void overWriteFileAndArrayWithDummyData(){
         fileEditor.useDummyData();
-        allStones = fileEditor.readDominosFile();
+        fileEditor.readDominosFile(allStones);
     }
 
     //updates the array containing all Dominostones
-    public void adjustArray(){
-        allStones = fileEditor.readDominosFile();
+    public boolean adjustArray(){
+        return fileEditor.readDominosFile(allStones);
     }
 
     //tests if the array containing all Dominostones, if not it prints a warning
