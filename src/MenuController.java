@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * This class is a controller class and is only needed to redirect the user entry to the particular function
+ * This class is a controller class and is only needed to redirect the user entry to the particular function.
  */
 public class MenuController {
     Scanner inputValue = new Scanner(System.in);
@@ -12,8 +12,8 @@ public class MenuController {
     }
 
     /**
-     * Method which shows the menu and saves the entry of the user
-     * @return variable which saved the userentry in itself
+     * Method which shows the menu and saves the entry of the user.
+     * @return variable which saved the userentry in itself.
      */
     public String showMenuAndGetUserInput() {
         System.out.println("[1] to see all your Dominos\n" +
@@ -28,8 +28,8 @@ public class MenuController {
     }
 
     /**
-     * Method which contains a switch-case redirecting the user to the particular methodlogic
-     * @param userInput is the entry of the user
+     * Method which contains a switch-case redirecting the user to the particular methodlogic.
+     * @param userInput is the entry of the user.
      */
     public void switchCase(String userInput) {
         System.out.println("\n".repeat(20));

@@ -1,25 +1,25 @@
 /**
  * This class represents a dominostone.
- * These are needed to perform the calculation and the algoritm of the class
+ * These are needed to perform the calculation and the algoritm of the class.
  */
 public class Dominostone{
     /**
-     * Variable representing the left field of the dominostone
-     * usually saves the smaller value of the sides in itself
+     * Variable representing the left field of the dominostone.
+     * Usually saves the smaller value of the sides in itself.
      */
     private int leftField;
     /**
-     * Variable representing the right field of the dominostone
-     * usually saves the bigger value of the sides in itself
+     * Variable representing the right field of the dominostone.
+     * Usually saves the bigger value of the sides in itself.
      */
     private int rightField;
     /**
-     * Variable that knows if the stone was already set in the calculation
+     * Variable that knows if the stone was already set in the calculation.
      */
     private boolean isSet;
     /**
      * Varible that shows if smallerField and biggerField are the same
-     * if they are canTurn is false otherwise true
+     * if they are, canTurn is false otherwise true.
      */
     private boolean canTurn;
 
@@ -34,7 +34,7 @@ public class Dominostone{
     }
 
     /**
-     * @return string that prints a dominostone on the screen
+     * @return string that prints a dominostone on the screen.
      */
     public String toString(){
         return "| " + leftField + " | " + rightField + " |";
@@ -48,17 +48,20 @@ public class Dominostone{
     }
 
     /**
-     * Method that changes the fields so that we're able to turn the stone
+     * Method that changes the fields so that we're able to turn the stone.
      */
-    public void turnFields(){
+    public boolean turnFields(){
+        if(!canTurn)
+            return false;
         int save = leftField;
         leftField = rightField;
         rightField = save;
+        return true;
     }
 
     /**
-     * The lower methods are getters and setters
-     * They return private fields or save values for private fields
+     * The lower methods are getters and setters.
+     * They return private fields or save values for private fields.
      */
     public int getLeftField() {
         return leftField;
@@ -84,12 +87,11 @@ public class Dominostone{
         isSet = set;
     }
 
-    public boolean isCanTurn() {
+    public boolean canTurn() {
         return canTurn;
     }
 
     public void setCanTurn(boolean canTurn) {
         this.canTurn = canTurn;
     }
-
 }

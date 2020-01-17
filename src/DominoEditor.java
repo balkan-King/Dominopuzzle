@@ -28,7 +28,7 @@ public class DominoEditor {
                         System.out.print("[0" + (count + 1) + "] ");
                     else
                         System.out.print("[" + (count + 1) + "] ");
-                    System.out.println(allStones.get(count).toString());
+                    System.out.print(allStones.get(count).toString());
                     System.out.print("\t");
                     count++;
                 }
@@ -63,6 +63,7 @@ public class DominoEditor {
 
     private boolean addStone(Dominostone d){
         if(allStones.add(d)){
+            adjustStones();
             allStones.sort(new DominoComparator());
             if(fileEditor.convertArrayToFile(allStones)){
                 if(adjustArray())
@@ -98,7 +99,7 @@ public class DominoEditor {
                 confirmation = inputValue.nextLine();
             }
             if (!confirmation.toLowerCase().equals("x"))
-                dominoCalculator.printAllPossibilities(allStones);
+                dominoCalculator.printAllPossibilities();
         }
     }
 
@@ -123,7 +124,12 @@ public class DominoEditor {
         }
     }
 
-
+    public void adjustStones(){
+        for(Dominostone d : allStones){
+            if(!(d.getLeftField() <= d.getRightField()))
+                d.turnFields();
+        }
+    }
 
 
 
