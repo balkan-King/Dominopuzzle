@@ -97,18 +97,30 @@ public class DominoEditor {
     public void deleteStoneForm(){
         printAllStones();
         System.out.println("Select which stone you want to remove:");
-        int deleteStone = Integer.parseInt(inputValue.nextLine());
-        deleteStone(deleteStone);
+        try {
+            int deleteStone = Integer.parseInt(inputValue.nextLine());
+            if (deleteStone(deleteStone))
+                System.out.println("The dominostone was successfully deleted");
+        }catch(NumberFormatException e){
+            System.out.println("Please enter a valid value");
+        }
     }
 
     /**
      * Deletes a stone from the array and the file.
      * @param deleteStone is the object getting deleted.
      */
-    private void deleteStone(int deleteStone){
-        allStones.remove(deleteStone - 1);
-        fileEditor.convertArrayToFile(allStones);
-        adjustArray();
+    private boolean deleteStone(int deleteStone){
+        try {
+            allStones.remove(deleteStone - 1);
+            if (fileEditor.convertArrayToFile(allStones)) {
+                adjustArray();
+                return true;
+            }
+        }catch(IndexOutOfBoundsException e){
+            System.out.println("Please enter a valid value");
+        }
+        return false;
     }
 
 
