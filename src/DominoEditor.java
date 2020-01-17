@@ -28,7 +28,7 @@ public class DominoEditor {
                         System.out.print("[0" + (count + 1) + "] ");
                     else
                         System.out.print("[" + (count + 1) + "] ");
-                    allStones.get(count).print();
+                    System.out.println(allStones.get(count).toString());
                     System.out.print("\t");
                     count++;
                 }
