@@ -48,7 +48,7 @@ public class Dominostone{
     }
 
     /**
-     * Method that changes the fields so that we're able to turn the stone.
+     * Changes the fields so that we're able to turn the stone.
      */
     public boolean turnFields(){
         if(!canTurn)

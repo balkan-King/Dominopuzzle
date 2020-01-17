@@ -12,7 +12,7 @@ public class MenuController {
     }
 
     /**
-     * Method which shows the menu and saves the entry of the user.
+     * Shows the menu and saves the entry of the user.
      * @return variable which saved the userentry in itself.
      */
     public String showMenuAndGetUserInput() {
@@ -28,7 +28,7 @@ public class MenuController {
     }
 
     /**
-     * Method which contains a switch-case redirecting the user to the particular methodlogic.
+     * Contains a switch-case redirecting the user to the particular method.
      * @param userInput is the entry of the user.
      */
     public void switchCase(String userInput) {

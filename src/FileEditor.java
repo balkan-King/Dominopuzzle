@@ -30,7 +30,7 @@ public class FileEditor {
     }
 
     /**
-     * Method that creates a file, it already exists it gets deleted.
+     * Creates a file, it already exists it gets deleted.
      * @param file that gets deleted and created.
      * @returnn true if the creation was successful, false if not.
      */
@@ -47,7 +47,7 @@ public class FileEditor {
     }
 
     /**
-     * Method that reads the dominofile and puts the data into the given arraylist.
+     * Reads the dominofile and puts the data into the given arraylist.
      * @param allStones arraylist in which the data gets extracted.
      * @return true if the creation was successful, false if not.
      */
@@ -68,7 +68,7 @@ public class FileEditor {
     }
 
     /**
-     * Method that copies the given arraylist into the dominoFile to overwrite it.
+     * Copies the given arraylist into the dominoFile to overwrite it.
      * @param allStones ArrayList.
      * @return true if the creation was successful, false if not.
      */
@@ -92,7 +92,7 @@ public class FileEditor {
     }
 
     /**
-     * Method that overwrites the dominoFile with the given dummy data.
+     * Overwrites the dominoFile with the given dummy data.
      */
     public void useDummyData() {
         File dominoFile = new File(dominoPath);
@@ -107,7 +107,7 @@ public class FileEditor {
     }
 
     /**
-     * Method that copies the data from the source File to the copyTo File.
+     * Copies the data from the source File to the copyTo File.
      * @param source File.
      * @param copyTo File.
      * @return true if the creation was successful, false if not.
@@ -136,7 +136,7 @@ public class FileEditor {
     }
 
     /**
-     * Method that tries to create the file given as parameter.
+     * Tries to create the file given as parameter.
      * @param file .
      * @return true if it could be created.
      */
@@ -152,7 +152,7 @@ public class FileEditor {
     }
 
     /**
-     * Method that tries to delete the file given as parameter.
+     * Tries to delete the file given as parameter.
      * @param file .
      * @return true if it could be deleted.
      */
@@ -164,7 +164,7 @@ public class FileEditor {
     }
 
     /**
-     * Method that prints dominostone into the solutionFile.
+     * Prints dominostone into the solutionFile.
      * @param dominostone .
      */
     public void printSolution(Dominostone dominostone){
@@ -178,7 +178,7 @@ public class FileEditor {
     }
 
     /**
-     * Method that adds a new line into the solutionFile.
+     * Adds a new line into the solutionFile.
      */
     public void addLineSeperator(){
         try {

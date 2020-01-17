@@ -19,7 +19,7 @@ public class DominoEditor {
 
 
     /**
-     * Prints all dominostones to the screen with the position in the array
+     * Prints all dominostones to the screen with the position in the array.
      */
     public void printAllStones() {
         if (dominoArrayIsNotEmpty()){
@@ -37,8 +37,8 @@ public class DominoEditor {
     }
 
     /**
-     * Prints the dominostone to the screen with the position in the array
-     * @param count position in allStones array
+     * Prints the dominostone to the screen with the position in the array.
+     * @param count position in allStones array.
      */
     public void printToScreen(int count){
         if (count < 9)
@@ -75,9 +75,9 @@ public class DominoEditor {
     }
 
     /**
-     * Adds a new dominostone to the array and the file
-     * @param dominostone is the object that gets added
-     * @return true if the adding was successful, false if not
+     * Adds a new dominostone to the array and the file.
+     * @param dominostone is the object that gets added.
+     * @return true if the adding was successful, false if not.
      */
     private boolean addStone(Dominostone dominostone){
         if(allStones.add(dominostone)){
@@ -92,7 +92,7 @@ public class DominoEditor {
     }
 
     /**
-     * Asks the user which stone to remove
+     * Asks the user which stone to remove.
      */
     public void deleteStoneForm(){
         printAllStones();
@@ -102,8 +102,8 @@ public class DominoEditor {
     }
 
     /**
-     * Deletes a stone from the array and the file
-     * @param deleteStone is the object getting deleted
+     * Deletes a stone from the array and the file.
+     * @param deleteStone is the object getting deleted.
      */
     private void deleteStone(int deleteStone){
         allStones.remove(deleteStone - 1);
@@ -113,7 +113,7 @@ public class DominoEditor {
 
 
     /**
-     * Executes the calculation and tests that the array doesnt contain too many stones
+     * Executes the calculation and tests that the array doesnt contain too many stones.
      */
     public void calculateSolution(){
         if(dominoArrayIsNotEmpty()){
@@ -128,7 +128,7 @@ public class DominoEditor {
     }
 
     /**
-     * Overwrites the file and the array with the given dummydata
+     * Overwrites the file and the array with the given dummydata.
      */
     public void overWriteFileAndArrayWithDummyData(){
         fileEditor.useDummyData();
@@ -136,14 +136,14 @@ public class DominoEditor {
     }
 
     /**
-     * Updates the array containing all dominos
+     * Updates the array containing all dominos.
      */
     public void adjustArray(){
         fileEditor.readDominosFile(allStones);
     }
 
     /**
-     * Tests if the array with the dominos contains anything
+     * Tests if the array with the dominos contains anything.
      * @return boolean
      */
     public boolean dominoArrayIsNotEmpty(){
@@ -151,7 +151,7 @@ public class DominoEditor {
     }
 
     /**
-     * Ensures that the left field is smaller then the right
+     * Ensures that the left field is smaller then the right.
      */
     public void adjustStones(){
         for(Dominostone d : allStones){

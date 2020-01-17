@@ -15,7 +15,7 @@ public class DominoCalculator {
     }
 
     /**
-     * Method which executes generateNextArray with all dominos in unorderedDominos as parameter.
+     * Executes generateNextArray with all dominos in unorderedDominos as parameter.
      * It also checks if the stone can be turned, and tries it again if so.
      */
     public void printAllPossibilities(){
@@ -28,7 +28,7 @@ public class DominoCalculator {
     }
 
     /**
-     * Method that generates all possible solutions with dominostone as first object and remainingStones as the following.
+     * Generates all possible solutions with dominostone as first object and remainingStones as the following.
      * @param dominostone is the first object in the ordereddominos array.
      * @param remainingStones is an array containing all objects, that are needed to be added to ordereddominos for the correct solution.
      */
@@ -52,7 +52,7 @@ public class DominoCalculator {
     }
 
     /**
-     * Method that returns a new Array that is identical to remainingStones without the given Dominostone object.
+     * Returns a new Array that is identical to remainingStones without the given Dominostone object.
      * @param dominoStone object in remainingStones.
      * @param remainingStones .
      * @return remainingStones as new Array without dominoStone.
@@ -64,7 +64,7 @@ public class DominoCalculator {
     }
 
     /**
-     * Method that checks if the ordereddominos array contains a solution.
+     * Checks if the ordereddominos array contains a solution.
      * That is indicated by having the same size as the unorderedDominos array.
      * @param unorderedDominos .
      * @return true if the ordereddominos array contains a solution.
@@ -74,7 +74,7 @@ public class DominoCalculator {
     }
 
     /**
-     * Method that removes the given stone from the ordereddominos array and sets the attribute isSet to false.
+     * Removes the given stone from the ordereddominos array and sets the attribute isSet to false.
      * @param dominostone .
      */
     private void removeStoneFromArray(Dominostone dominostone){
@@ -83,27 +83,27 @@ public class DominoCalculator {
     }
 
     /**
-     * Method that tests if the dominostone can be added to the ordereddominos array.
+     * Tests if the dominostone can be added to the ordereddominos array.
      * The conditions are that the stone is not set already and doesMatch() returns true.
      * @param dominostone .
-     * @return true if it can be added, false if not
+     * @return true if it can be added, false if not.
      */
     private boolean stoneCanBeAdded(Dominostone dominostone){
         return !dominostone.isSet() && doesMatch(dominostone);
     }
 
     /**
-     * Method that tests if the left field of the given parameter matches,
+     * Tests if the left field of the given parameter matches,
      * with the right field of the last entry in the ordereddominos array.
      * @param dominostone .
-     * @return true if they match, false if not
+     * @return true if they match, false if not.
      */
     private boolean doesMatch(Dominostone dominostone){
         return orderedDominos.get(orderedDominos.size() - 1).getRightField() == dominostone.getLeftField();
     }
 
     /**
-     * Method that adds the given stone into the ordereddominos array and sets the attribute isSet to true.
+     * Adds the given stone into the ordereddominos array and sets the attribute isSet to true.
      * @param dominostone .
      */
     private void addStoneToArray(Dominostone dominostone){
@@ -112,7 +112,7 @@ public class DominoCalculator {
     }
 
     /**
-     * Method that gets executed as soon as all dominos are set in the array.
+     * Gets executed as soon as all dominos are set in the array.
      * prints the array onto screen and into a file.
      */
     private void printDominoArray(){
