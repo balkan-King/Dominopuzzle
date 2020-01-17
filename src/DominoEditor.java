@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class contains all methods of the program that have nothing to do with the calculation or the filehandling.
+ */
 public class DominoEditor {
 
     private ArrayList<Dominostone> allStones = new ArrayList<>();
@@ -15,7 +18,9 @@ public class DominoEditor {
     }
 
 
-    //This function is needed to display all stones (COULD BE BETTER)
+    /**
+     * Prints all dominostones to the screen with the position in the array
+     */
     public void printAllStones() {
         if (dominoArrayIsNotEmpty()){
             int count = 0;
@@ -23,12 +28,7 @@ public class DominoEditor {
                 for (int x = 0; x < 5; x++) {
                     if (count == allStones.size())
                         break;
-                    if (count < 9)
-                        System.out.print("[0" + (count + 1) + "] ");
-                    else
-                        System.out.print("[" + (count + 1) + "] ");
-                    System.out.print(allStones.get(count).toString());
-                    System.out.print("\t");
+                    printToScreen(count);
                     count++;
                 }
                 System.out.println();
@@ -36,8 +36,22 @@ public class DominoEditor {
         }
     }
 
+    /**
+     * Prints the dominostone to the screen with the position in the array
+     * @param count position in allStones array
+     */
+    public void printToScreen(int count){
+        if (count < 9)
+            System.out.print("[0" + (count + 1) + "] ");
+        else
+            System.out.print("[" + (count + 1) + "] ");
+        System.out.print(allStones.get(count).toString());
+        System.out.print("\t");
+    }
 
-    //This two functions are needed to add a stone (UNFINISHED)
+    /**
+     * Asks the user, how the new stone should look like, thats going to be added.
+     */
     public void addStoneForm(){
         Dominostone dominostone;
         int smallerValue, biggerValue;
@@ -60,20 +74,26 @@ public class DominoEditor {
         }
     }
 
-    private boolean addStone(Dominostone d){
-        if(allStones.add(d)){
+    /**
+     * Adds a new dominostone to the array and the file
+     * @param dominostone is the object that gets added
+     * @return true if the adding was successful, false if not
+     */
+    private boolean addStone(Dominostone dominostone){
+        if(allStones.add(dominostone)){
             adjustStones();
             allStones.sort(new DominoComparator());
             if(fileEditor.convertArrayToFile(allStones)){
-                if(adjustArray())
-                    return true;
+                adjustArray();
+                return true;
             }
         }
         return false;
     }
 
-
-    //This two methods are needed to delete a stone (EXTEND TO SHOW IF IT COULDNT BE DELETED BECAUSE THE USERENTRY WAS WRONG)
+    /**
+     * Asks the user which stone to remove
+     */
     public void deleteStoneForm(){
         printAllStones();
         System.out.println("Select which stone you want to remove:");
@@ -81,6 +101,10 @@ public class DominoEditor {
         deleteStone(deleteStone);
     }
 
+    /**
+     * Deletes a stone from the array and the file
+     * @param deleteStone is the object getting deleted
+     */
     private void deleteStone(int deleteStone){
         allStones.remove(deleteStone - 1);
         fileEditor.convertArrayToFile(allStones);
@@ -88,12 +112,13 @@ public class DominoEditor {
     }
 
 
-    //performs the calculation
+    /**
+     * Executes the calculation and tests that the array doesnt contain too many stones
+     */
     public void calculateSolution(){
         if(dominoArrayIsNotEmpty()){
             String confirmation = "";
-            //if the array contains more then 15 stones it prints a warning, that it could take a while
-            if (allStones.size() > 15) {
+            if (allStones.size() > 10) {
                 System.out.println("The calculation could take a while with such an amount of dominos\n If you want to adjust your dominostones enter 'x'");
                 confirmation = inputValue.nextLine();
             }
@@ -102,27 +127,32 @@ public class DominoEditor {
         }
     }
 
-    //overwrites the array and the userfile with some dummydata
+    /**
+     * Overwrites the file and the array with the given dummydata
+     */
     public void overWriteFileAndArrayWithDummyData(){
         fileEditor.useDummyData();
         fileEditor.readDominosFile(allStones);
     }
 
-    //updates the array containing all Dominostones
-    public boolean adjustArray(){
-        return fileEditor.readDominosFile(allStones);
+    /**
+     * Updates the array containing all dominos
+     */
+    public void adjustArray(){
+        fileEditor.readDominosFile(allStones);
     }
 
-    //tests if the array containing all Dominostones, if not it prints a warning
+    /**
+     * Tests if the array with the dominos contains anything
+     * @return boolean
+     */
     public boolean dominoArrayIsNotEmpty(){
-        if(!allStones.isEmpty()) {
-            return true;
-        } else{
-            System.err.println("Your Array is empty");
-            return false;
-        }
+        return (!allStones.isEmpty());
     }
 
+    /**
+     * Ensures that the left field is smaller then the right
+     */
     public void adjustStones(){
         for(Dominostone d : allStones){
             if(!(d.getLeftField() <= d.getRightField()))
@@ -131,12 +161,10 @@ public class DominoEditor {
     }
 
 
-
-
-
-
-
-    //Getters and Setters
+    /**
+     * The lower methods are getters and setters.
+     * They return private fields or save values for private fields.
+     */
     public ArrayList<Dominostone> getAllStones() {
         return allStones;
     }

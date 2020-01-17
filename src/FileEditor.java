@@ -51,7 +51,7 @@ public class FileEditor {
      * @param allStones arraylist in which the data gets extracted.
      * @return true if the creation was successful, false if not.
      */
-    public boolean readDominosFile(ArrayList<Dominostone> allStones) {
+    public void readDominosFile(ArrayList<Dominostone> allStones) {
         allStones.removeAll(allStones);
         Scanner dominosFile;
         try{
@@ -62,11 +62,9 @@ public class FileEditor {
                 allStones.add(dominostone);
             }
             dominosFile.close();
-            return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return false;
     }
 
     /**
@@ -190,5 +188,34 @@ public class FileEditor {
         }catch(IOException e){
             e.printStackTrace();
         }
+    }
+
+
+    /**
+     * The lower methods are getters and setters.
+     * They return private fields or save values for private fields.
+     */
+    public String getDummyDataPath() {
+        return dummyDataPath;
+    }
+
+    public void setDummyDataPath(String dummyDataPath) {
+        this.dummyDataPath = dummyDataPath;
+    }
+
+    public String getDominoPath() {
+        return dominoPath;
+    }
+
+    public void setDominoPath(String dominoPath) {
+        this.dominoPath = dominoPath;
+    }
+
+    public String getResultFile() {
+        return resultFile;
+    }
+
+    public void setResultFile(String resultFile) {
+        this.resultFile = resultFile;
     }
 }
