@@ -19,12 +19,14 @@ public class DominoCalculator {
      * It also checks if the stone can be turned, and tries it again if so.
      */
     public void printAllPossibilities(){
+        long startingTime = System.currentTimeMillis();
         fileEditor.readDominosFile(unorderedDominos);
         for(Dominostone d : unorderedDominos) {
             generateNextArray(d, unorderedDominos);
             if(d.turnFields())
                 generateNextArray(d, unorderedDominos);
         }
+        System.out.println("\nThe calculation took: " + (System.currentTimeMillis() - startingTime) + " milliseconds");
     }
 
     /**
@@ -117,10 +119,10 @@ public class DominoCalculator {
      */
     private void printDominoArray(){
         for (Dominostone d : orderedDominos) {
-            System.out.print(d.toString());
+            //System.out.print(d.toString());
             fileEditor.printSolution(d);
         }
-        System.out.println();
+        //System.out.println();
         fileEditor.addLineSeperator();
     }
 }

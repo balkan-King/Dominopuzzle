@@ -21,7 +21,7 @@ public class MenuController {
                 "[2] to add a new Domino\n" +
                 "[3] to remove a Domino\n" +
                 "[4] to execute the calculation\n" +
-                "[5] to overwrite with some dummydata\n" +
+                "[5] to overwrite with default data\n" +
                 "[x] to turn off the application");
         String userInput = inputValue.nextLine();
         System.out.println();

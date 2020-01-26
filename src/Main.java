@@ -14,7 +14,7 @@ public class Main {
         /**
          * Variable which directs to the file containing some dummy dominos, which can be copied into the.
          */
-        String dummyDataLocation = "src\\Dominos\\dummydata.txt";
+        String dummyDataLocation = "src\\Dominos\\defaultdata.txt";
         /**
          * Variable which direct to the file where the result of the calculation will be printed in at the end.
          */
