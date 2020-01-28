@@ -53,15 +53,13 @@ public class FileEditor {
      */
     public void readDominosFile(ArrayList<Dominostone> allStones) {
         allStones.removeAll(allStones);
-        Scanner dominosFile;
-        try{
-            dominosFile = new Scanner(new File(dominoPath));
+
+        try(Scanner dominosFile = new Scanner(new File(dominoPath))){
             while(dominosFile.hasNextLine()){
                 String[] fields = dominosFile.nextLine().split(":");
                 Dominostone dominostone = new Dominostone(Integer.parseInt(fields[0]), Integer.parseInt(fields[1]));
                 allStones.add(dominostone);
             }
-            dominosFile.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -76,12 +74,10 @@ public class FileEditor {
         File oldData = new File(dominoPath);
         if(deleteOldFile(oldData)){
             if(createNewFile(oldData)){
-                try {
-                    BufferedWriter copyToWriter = new BufferedWriter(new FileWriter(oldData));
-                    for(int x = 0; x <allStones.size(); x++){
-                        copyToWriter.append(allStones.get(x).printInFile());
+                try(BufferedWriter copyToWriter = new BufferedWriter(new FileWriter(oldData))) {
+                    for (Dominostone dominostone : allStones) {
+                        copyToWriter.append(dominostone.printInFile());
                     }
-                    copyToWriter.close();
                     return true;
                 }catch (IOException e) {
                     e.printStackTrace();
@@ -113,18 +109,15 @@ public class FileEditor {
      * @return true if the creation was successful, false if not.
      */
     public boolean copyData(File source, File copyTo){
-        try {
-            FileInputStream sourceStream = new FileInputStream(source);
-            FileOutputStream copyToStream = new FileOutputStream(copyTo);
+        try(FileOutputStream copyToStream = new FileOutputStream(copyTo);
+            FileInputStream sourceStream = new FileInputStream(source)) {
+
             byte[] buffer = new byte[1024];
             int length;
 
             while ((length = sourceStream.read(buffer)) > 0) {
                 copyToStream.write(buffer, 0, length);
             }
-
-            sourceStream.close();
-            copyToStream.close();
             return true;
         } catch(FileNotFoundException e){
             System.out.println("File was not found");
@@ -168,10 +161,8 @@ public class FileEditor {
      * @param dominostone .
      */
     public void printSolution(Dominostone dominostone){
-        try {
-            FileWriter fileWriter = new FileWriter(resultFile, true);
+        try (FileWriter fileWriter = new FileWriter(resultFile, true)){
             fileWriter.append(dominostone.toString());
-            fileWriter.close();
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -181,10 +172,8 @@ public class FileEditor {
      * Adds a new line into the solutionFile.
      */
     public void addLineSeperator(){
-        try {
-            FileWriter fileWriter = new FileWriter(resultFile, true);
+        try (FileWriter fileWriter = new FileWriter(resultFile, true)){
             fileWriter.append("\n");
-            fileWriter.close();
         }catch(IOException e){
             e.printStackTrace();
         }
