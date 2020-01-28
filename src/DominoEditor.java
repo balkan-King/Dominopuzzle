@@ -11,8 +11,8 @@ public class DominoEditor {
     private FileEditor fileEditor;
     private Scanner inputValue = new Scanner(System.in);
 
-    public DominoEditor(String dominoPath, String dummyDataPath, String resultFile) {
-        fileEditor = new FileEditor(dummyDataPath, dominoPath, resultFile);
+    public DominoEditor(String dominoPath, String defaultDataPath, String resultFile) {
+        fileEditor = new FileEditor(defaultDataPath, dominoPath, resultFile);
         dominoCalculator = new DominoCalculator(fileEditor);
         fileEditor.readDominosFile(allStones);
     }
@@ -140,10 +140,10 @@ public class DominoEditor {
     }
 
     /**
-     * Overwrites the file and the array with the given dummydata.
+     * Overwrites the file and the array with the given defaultData.
      */
-    public void overWriteFileAndArrayWithDummyData(){
-        fileEditor.useDummyData();
+    public void overWriteFileAndArrayWithDefaultData(){
+        fileEditor.useDefaultData();
         fileEditor.readDominosFile(allStones);
     }
 

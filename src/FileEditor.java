@@ -9,9 +9,9 @@ import java.util.Scanner;
 public class FileEditor {
 
     /**
-     * Variable which directs to the file containing some dummy dominos, which can be copied into the.
+     * Variable which directs to the file containing some default dominos, which can be copied into the.
      */
-    private String dummyDataPath;
+    private String defaultDataPath;
     /**
      * Variable which directs to the file containing the dominos inside.
      */
@@ -21,8 +21,8 @@ public class FileEditor {
      */
     private String resultFile;
 
-    public FileEditor(String dummyDataPath, String dominoPath, String resultFile) {
-        this.dummyDataPath = dummyDataPath;
+    public FileEditor(String defaultDataPath, String dominoPath, String resultFile) {
+        this.defaultDataPath = defaultDataPath;
         this.dominoPath = dominoPath;
         this.resultFile = resultFile;
         File endResult = new File(resultFile);
@@ -92,15 +92,15 @@ public class FileEditor {
     }
 
     /**
-     * Overwrites the dominoFile with the given dummy data.
+     * Overwrites the dominoFile with the given default data.
      */
-    public void useDummyData() {
+    public void useDefaultData() {
         File dominoFile = new File(dominoPath);
-        File dummyFile = new File(dummyDataPath);
+        File defaultFile = new File(defaultDataPath);
         if(deleteOldFile(dominoFile)){
             if(createNewFile(dominoFile)){
-                if(copyData(dummyFile, dominoFile)){
-                    System.out.println("Dummydata was successfully applied");
+                if(copyData(defaultFile, dominoFile)){
+                    System.out.println("Defaultdata was successfully applied");
                 }
             }
         }
@@ -190,17 +190,25 @@ public class FileEditor {
         }
     }
 
+    /**
+     * Deletes and creates the file again
+     */
+    public void recreateFile(){
+        deleteOldFile(new File(resultFile));
+        createNewFile(new File(resultFile));
+    }
+
 
     /**
      * The lower methods are getters and setters.
      * They return private fields or save values for private fields.
      */
-    public String getDummyDataPath() {
-        return dummyDataPath;
+    public String getDefaultDataPath() {
+        return defaultDataPath;
     }
 
-    public void setDummyDataPath(String dummyDataPath) {
-        this.dummyDataPath = dummyDataPath;
+    public void setDefaultDataPath(String defaultDataPath) {
+        this.defaultDataPath = defaultDataPath;
     }
 
     public String getDominoPath() {

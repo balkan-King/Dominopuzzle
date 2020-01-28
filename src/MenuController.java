@@ -7,8 +7,8 @@ public class MenuController {
     Scanner inputValue = new Scanner(System.in);
     DominoEditor dominoEditor;
 
-    public MenuController(String dominoPath, String dummyDataPath, String resultFile) {
-        dominoEditor = new DominoEditor(dominoPath, dummyDataPath, resultFile);
+    public MenuController(String dominoPath, String defaultDataPath, String resultFile) {
+        dominoEditor = new DominoEditor(dominoPath, defaultDataPath, resultFile);
     }
 
     /**
@@ -55,7 +55,7 @@ public class MenuController {
                 inputValue.nextLine();
                 break;
             case "5":
-                dominoEditor.overWriteFileAndArrayWithDummyData();
+                dominoEditor.overWriteFileAndArrayWithDefaultData();
                 System.out.println("[Press Enter to continue]");
                 inputValue.nextLine();
                 break;

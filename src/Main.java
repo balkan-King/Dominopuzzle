@@ -12,9 +12,9 @@ public class Main {
          */
         String dominoPath = "src\\Dominos\\dominos.txt";
         /**
-         * Variable which directs to the file containing some dummy dominos, which can be copied into the.
+         * Variable which directs to the file containing some default dominos, which can be copied into the.
          */
-        String dummyDataLocation = "src\\Dominos\\defaultdata.txt";
+        String defaultDataLocation = "src\\Dominos\\defaultdata.txt";
         /**
          * Variable which direct to the file where the result of the calculation will be printed in at the end.
          */
@@ -24,7 +24,7 @@ public class Main {
          */
         String userInput;
 
-        MenuController menuController = new MenuController(dominoPath, dummyDataLocation, resultFile);
+        MenuController menuController = new MenuController(dominoPath, defaultDataLocation, resultFile);
 
         do {
             userInput = menuController.showMenuAndGetUserInput();
